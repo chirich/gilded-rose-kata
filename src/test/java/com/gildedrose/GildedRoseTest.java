@@ -15,6 +15,26 @@ class GildedRoseTest {
     }
 
     @Test
+    void testNormalQualityDecrease() {
+        Item[] items = new Item[] { new Item("bar", 5, 20)};
+        GildedRose app = new GildedRose(items);
+        for (int i = 0; i < 4; i++) {
+            app.updateQuality();
+        }
+        assertEquals(16, app.items[0].quality);
+    }
+
+    @Test
+    void testNormalSellInDecrease() {
+        Item[] items = new Item[] { new Item("bar", 5, 20)};
+        GildedRose app = new GildedRose(items);
+        for (int i = 0; i < 4; i++) {
+            app.updateQuality();
+        }
+        assertEquals(1, app.items[0].sellIn);
+    }
+
+    @Test
     void testQualityDegrades2xAfterSellIn() {
         Item[] items = new Item[] { new Item("bar", 2, 20)};
         GildedRose app = new GildedRose(items);
@@ -102,5 +122,15 @@ class GildedRoseTest {
             app.updateQuality();
         }
         assertEquals(0, app.items[0].quality);
+    }
+
+    @Test
+    void testConjuredItemQualityDegrade() {
+        Item[] items = new Item[] { new Item(GildedRose.CONJURED_PREFIX + "sword", 5, 20)};
+        GildedRose app = new GildedRose(items);
+        for (int i = 0; i < 3; i++) {
+            app.updateQuality();
+        }
+        assertEquals(14, app.items[0].quality);
     }
 }

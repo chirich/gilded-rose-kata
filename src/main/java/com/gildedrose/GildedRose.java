@@ -16,11 +16,16 @@ class GildedRose {
     public void updateQuality() {
         for (Item item : items) {
             updateItemQuality(item);
+            checkMinMaxQuality(item);
             updateItemSellIn(item);
         }
     }
 
     private void updateItemQuality(Item item) {
+        if (item.name.startsWith(CONJURED_PREFIX)) {
+            item.quality -= 2;
+            return;
+        }
         switch (item.name) {
             case AGED_BRIE:
                 item.quality++;
@@ -34,6 +39,9 @@ class GildedRose {
                 item.quality = item.sellIn <= 0 ? item.quality - 2 : item.quality - 1;
                 break;
         }
+    }
+
+    private void checkMinMaxQuality(Item item) {
         // max quality = 50
         if (item.quality > 50) {
             item.quality = 50;
