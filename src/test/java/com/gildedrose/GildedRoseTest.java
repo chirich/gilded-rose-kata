@@ -32,7 +32,7 @@ class GildedRoseTest {
         for (int i = 0; i < 3; i++) {
             app.updateQuality();
         }
-        assertTrue(app.items[0].quality >= 0);
+        assertTrue(app.items[0].quality == 0);
     }
 
     @Test
@@ -66,13 +66,33 @@ class GildedRoseTest {
     }
 
     @Test
-    void testBackstagePassQualityIncrease() {
+    void testSulfurasSellInConstant() {
+        Item[] items = new Item[] { new Item(GildedRose.SULFURAS, 5, 20)};
+        GildedRose app = new GildedRose(items);
+        for (int i = 0; i < 4; i++) {
+            app.updateQuality();
+        }
+        assertEquals(5, app.items[0].sellIn);
+    }
+
+    @Test
+    void testBackstagePassQualityIncrease5OrLess() {
         Item[] items = new Item[] { new Item(GildedRose.BACKSTAGE_PASS, 5, 20)};
         GildedRose app = new GildedRose(items);
         for (int i = 0; i < 4; i++) {
             app.updateQuality();
         }
         assertEquals(32, app.items[0].quality);
+    }
+
+    @Test
+    void testBackstagePassQualityIncrease10OrLess() {
+        Item[] items = new Item[] { new Item(GildedRose.BACKSTAGE_PASS, 11, 20)};
+        GildedRose app = new GildedRose(items);
+        for (int i = 0; i < 4; i++) {
+            app.updateQuality();
+        }
+        assertEquals(27, app.items[0].quality);
     }
 
     @Test
