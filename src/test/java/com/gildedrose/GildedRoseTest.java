@@ -16,7 +16,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void testQualityDegrades2xAfterSellin() {
+    void testQualityDegrades2xAfterSellIn() {
         Item[] items = new Item[] { new Item("bar", 2, 20)};
         GildedRose app = new GildedRose(items);
         for (int i = 0; i < 4; i++) {
@@ -32,7 +32,7 @@ class GildedRoseTest {
         for (int i = 0; i < 3; i++) {
             app.updateQuality();
         }
-        assertTrue(app.items[0].quality == 0);
+        assertEquals(0, app.items[0].quality);
     }
 
     @Test
@@ -96,7 +96,7 @@ class GildedRoseTest {
     }
 
     @Test
-    void testBackstagePassQualityDrop() {
+    void testBackstagePassQualityDropAfterConcert() {
         Item[] items = new Item[] { new Item(GildedRose.BACKSTAGE_PASS, 5, 20)};
         GildedRose app = new GildedRose(items);
         for (int i = 0; i < 6; i++) {
